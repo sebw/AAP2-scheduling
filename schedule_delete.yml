@@ -1,5 +1,5 @@
 ---
-- name: Create my organization
+- name: Create my schedule
   hosts: localhost
   gather_facts: False
 
@@ -13,6 +13,7 @@
     start_day: "21"
     start_hour: "14"
     start_minute: "00"
+    cluster_name: 
 
   collections:
   - ansible.controller
@@ -21,8 +22,8 @@
   - name: One time schedule for patching the cluster
     awx.awx.schedule:
       name: "{{ customer }} patch cluster"
-      unified_job_template: "[WF] Patch cluster"
-      state: present
+      unified_job_template: "[WF] Patch cluster SAP"
+      state: absent
       controller_host: "{{ aap2_host }}"
       controller_username: "{{ aap2_username }}"
       controller_password: "{{ aap2_password }}"
