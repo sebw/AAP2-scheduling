@@ -28,5 +28,5 @@
       controller_username: "{{ aap2_username }}"
       controller_password: "{{ aap2_password }}"
       validate_certs: False
-      rrule: "DTSTART;TZID=Europe/Brussels::{{ start_year }}{{ start_month }}{{ start_day }}T{{ start_hour }}{{ start_minute }}00Z RRULE:FREQ=MINUTELY;INTERVAL=1;COUNT=1"
+      rrule: "DTSTART;TZID=Europe/Brussels:{{ start_year }}{{ start_month }}{{ start_day }}T{{ start_hour }}{{ start_minute }}00Z RRULE:FREQ=MINUTELY;INTERVAL=1;COUNT=1"
     register: schedule_result
