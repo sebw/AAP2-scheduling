@@ -1,0 +1,31 @@
+---
+- name: Create my organization
+  hosts: localhost
+  gather_facts: False
+
+  vars_files:
+  - vault.yml
+  - vars.yml
+
+  vars:
+    start_year: "2024"
+    start_month: "08"
+    start_day: "21"
+    start_hour: "14"
+    start_minute: "00"
+
+  collections:
+  - ansible.controller
+
+  tasks:
+  - name: One time schedule for patching the cluster
+    ansible.controller.schedule:
+      name: "{{ customer }} patch cluster"
+      unified_job_template: "[WF] Patch cluster"
+      state: present
+      controller_host: "{{ aap2_host }}"
+      controller_username: "{{ aap2_username }}"
+      controller_password: "{{ aap2_password }}"
+      validate_certs: False
+      rrule: "DTSTART:{{ start_year }}{{ start_month }}{{ start_day }}T{{ start_hour }}{{ start_minute }}51Z RRULE:FREQ=WEEKLY;INTERVAL=1;COUNT=1"
+    register: schedule_result
