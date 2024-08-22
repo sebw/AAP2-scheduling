@@ -19,7 +19,7 @@
 
   tasks:
   - name: One time schedule for patching the cluster
-    ansible.controller.schedule:
+    awx.awx.schedule:
       name: "{{ customer }} patch cluster"
       unified_job_template: "[WF] Patch cluster"
       state: present
