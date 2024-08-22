@@ -21,7 +21,7 @@
   tasks:
   - name: Deleting schedule
     awx.awx.schedule:
-      name: "{{ start_year }}{{ start_month }}{{ start_day }}T{{ start_hour }}{{ start_minute }}_patch_{{ cluster_name }}"
+      name: "patch_cluster_{{ cluster_name }}"
       state: absent
       controller_host: "{{ aap2_host }}"
       controller_username: "{{ aap2_username }}"

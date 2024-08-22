@@ -21,7 +21,7 @@
   tasks:
   - name: One time schedule for patching the cluster
     awx.awx.schedule:
-      name: "{{ start_year }}{{ start_month }}{{ start_day }}T{{ start_hour }}{{ start_minute }}_patch_{{ cluster_name }}"
+      name: "patch_cluster_{{ cluster_name }}"
       unified_job_template: "[WF] Patch cluster {{ cluster_name }}"
       state: present
       controller_host: "{{ aap2_host }}"
