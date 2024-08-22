@@ -13,20 +13,18 @@
     start_day: "21"
     start_hour: "14"
     start_minute: "00"
-    cluster_name: 
+    cluster_name: "SAP"
 
   collections:
   - ansible.controller
 
   tasks:
-  - name: One time schedule for patching the cluster
+  - name: Deleting schedule
     awx.awx.schedule:
-      name: "{{ customer }} patch cluster"
-      unified_job_template: "[WF] Patch cluster SAP"
+      name: "{{ start_year }}{{ start_month }}{{ start_day }}T{{ start_hour }}{{ start_minute }}_patch_{{ cluster_name }}"
       state: absent
       controller_host: "{{ aap2_host }}"
       controller_username: "{{ aap2_username }}"
       controller_password: "{{ aap2_password }}"
       validate_certs: False
-      rrule: "DTSTART;TZID=Europe/Brussels:{{ start_year }}{{ start_month }}{{ start_day }}T{{ start_hour }}{{ start_minute }}51 RRULE:FREQ=MINUTELY;INTERVAL=1;COUNT=1"
     register: schedule_result
