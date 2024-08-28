@@ -16,7 +16,7 @@
     cluster_name: "SAP"
 
   collections:
-  - ansible.controller
+  - awx.awx
 
   tasks:
   - name: One time schedule for patching the cluster
