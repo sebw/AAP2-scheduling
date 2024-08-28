@@ -1,0 +1,26 @@
+---
+- name: update survey
+  hosts: localhost
+  gather_facts: false
+
+  vars_files:
+  - vault.yml
+
+  tasks:
+    - name: Adjust default value for survey
+      awx.awx.job_template:
+        name: "Create schedule (with survey)"
+        job_type: "run"
+        organization: "PIDPA"
+        inventory: "localhost"
+        project: "scheduling"
+        playbook: "schedule.yml"
+        credentials:
+          - "Ansible Vault"
+          - "SSH"
+        state: "present"
+        survey_enabled: yes
+        survey_spec: "{{ lookup('file', 'survey.json') }}"
+        controller_host: "{{ aap2_host }}"
+        controller_username: "{{ aap2_username }}"
+        controller_password: "{{ aap2_password }}"
