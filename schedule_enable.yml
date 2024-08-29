@@ -1,0 +1,21 @@
+---
+- name: Disable a schedule
+  hosts: localhost
+  gather_facts: False
+
+  vars_files:
+  - vault.yml
+
+  collections:
+  - awx.awx
+
+  tasks:
+  - awx.awx.schedule:
+      name: "every_minute"
+      enabled: true
+      state: present
+      controller_host: "{{ aap2_host }}"
+      controller_username: "{{ aap2_username }}"
+      controller_password: "{{ aap2_password }}"
+      validate_certs: true
+    register: schedule_result
